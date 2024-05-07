@@ -1,9 +1,12 @@
-package com.yupi.example.consumer;
+package com.rpc.client.example;
 
-import com.yupi.example.common.model.User;
-import com.yupi.example.common.service.UserService;
-import com.yupi.yurpc.bootstrap.ConsumerBootstrap;
-import com.yupi.yurpc.proxy.ServiceProxyFactory;
+
+import com.google.protobuf.RpcUtil;
+import com.rpc.common.model.User;
+import com.rpc.common.service.UserService;
+import com.rpc.config.RpcConfig;
+import com.rpc.proxy.ProxyFactory;
+import com.rpc.utils.ConfigUtils;
 
 /**
  * 服务消费者示例
@@ -15,13 +18,12 @@ import com.yupi.yurpc.proxy.ServiceProxyFactory;
 public class ConsumerExample {
 
     public static void main(String[] args) {
-        // 服务提供者初始化
-        ConsumerBootstrap.init();
-
+        RpcConfig rpcConfig = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
+        System.out.println("rpcConfig is "+rpcConfig);
         // 获取代理
-        UserService userService = ServiceProxyFactory.getProxy(UserService.class);
+        UserService userService = ProxyFactory.getProxy(UserService.class);
         User user = new User();
-        user.setName("yupi");
+        user.setName("junhqin");
         // 调用
         User newUser = userService.getUser(user);
         if (newUser != null) {
@@ -29,5 +31,6 @@ public class ConsumerExample {
         } else {
             System.out.println("user == null");
         }
+        System.out.println(userService.getNumber());
     }
 }

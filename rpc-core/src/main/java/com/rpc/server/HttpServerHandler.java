@@ -1,10 +1,11 @@
 package com.rpc.server;
 
+import com.rpc.RpcApplication;
 import com.rpc.dto.RpcRequest;
 import com.rpc.dto.RpcResponse;
 import com.rpc.registry.LocalRegistry;
-import com.rpc.serializer.JdkSerializer;
 import com.rpc.serializer.Serializer;
+import com.rpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -13,7 +14,7 @@ import io.vertx.core.http.HttpServerResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-public class VertxRpcServerHandler implements Handler<HttpServerRequest> {
+public class HttpServerHandler implements Handler<HttpServerRequest> {
     /**
      * 响应
      * @param request
@@ -34,8 +35,7 @@ public class VertxRpcServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
         //指定序列化器
-        final Serializer serializer = new JdkSerializer();
-
+        final Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         //记录日志
         System.out.println("Received request:"+request.method()+' '+request.uri());
         //vertx不同的web服务器的请求处理器是不一样

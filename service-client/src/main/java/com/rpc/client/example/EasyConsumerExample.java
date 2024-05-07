@@ -1,4 +1,4 @@
-package com.rpc.client;
+package com.rpc.client.example;
 
 import com.rpc.common.model.User;
 import com.rpc.common.service.UserService;

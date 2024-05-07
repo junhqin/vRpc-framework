@@ -1,2 +1,4 @@
-package com.rpc.server.example;public class ProviderExample {
+package com.rpc.server.example;
+
+public class ProviderExample {
 }

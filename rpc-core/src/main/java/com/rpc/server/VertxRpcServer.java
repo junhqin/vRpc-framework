@@ -11,11 +11,10 @@ public class VertxRpcServer {
         Vertx vertx = Vertx.vertx();
 
         // 创建 HTTP 服务器
-        io.vertx.core.http.HttpServer server = vertx.createHttpServer();
+        HttpServer server = vertx.createHttpServer();
 
         // 监听端口并处理请求
-        server.requestHandler(new VertxRpcServerHandler());
-
+        server.requestHandler(new HttpServerHandler());
         // 启动 HTTP 服务器并监听指定端口
         server.listen(PORT, result -> {
             if (result.succeeded()) {

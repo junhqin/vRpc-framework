@@ -1,6 +1,5 @@
 package com.rpc.dto;
 
-import com.rpc.serializer.Serializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
