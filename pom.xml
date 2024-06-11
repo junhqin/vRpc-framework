@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-common</module>
-        <module>service-server</module>
-        <module>service-client</module>
+        <module>service-provider</module>
+        <module>service-consumer</module>
         <module>rpc-simple</module>
         <module>rpc-core</module>
     </modules>

@@ -1,7 +1,8 @@
 package com.rpc.utils;
 
 
-import cn.hutool.core.bean.BeanUtil;
+import
+        cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
@@ -23,15 +24,15 @@ public class ConfigUtils {
      * @return
      */
     public static <T> T loadConfig(Class<T> tClass, String prefix) {
-        return loadFromPros(tClass, prefix, "");
+        return loadConfig(tClass, prefix, "");
     }
 
     public static <T> T loadConfig(Class<T> tClass,String prefix, String environment){
-        StringBuilder sb = new StringBuilder("applicaton");
+        StringBuilder sb = new StringBuilder("application");
         if(StrUtil.isNotBlank(environment)){
             sb.append("-").append(environment);
         }
-        sb.append(".yml");
+        sb.append(".yaml");
         if(FileUtil.exist(sb.toString())){
             return loadFromYaml(tClass, prefix, environment);
         }else
@@ -43,7 +44,7 @@ public class ConfigUtils {
         if (StrUtil.isNotBlank(environment)) {
             sb.append("-").append(environment);
         }
-        sb.append(".yml");
+        sb.append(".yaml");
         T config = null;
         Map<String, Object> map = YamlUtil.loadByPath(sb.toString());
         if (map.get(prefix) != null) {

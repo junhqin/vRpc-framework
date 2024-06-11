@@ -17,10 +17,10 @@
 |-- service-common                  -- 示例代码的一些依赖，包括接口、model
 |-- rpc-core      -- 框架核心实现
 |-- rpc-spring-boot-starter -- 注解驱动，可在 Spring Boot 项目中使用 
-|-- service-client        -- 服务消费者示例
-|-- service-server       -- 服务提供者示例
+|-- service-consumer       -- 服务消费者示例
+|-- service-provider       -- 服务提供者示例
 |-- example-consumer     -- 使用注解的服务消费者示例
-`-- example-provider     -- 使用注解的服务提供在示例
+|-- example-provider     -- 使用注解的服务提供在示例
 ```
 
 #### 具体功能
@@ -28,7 +28,7 @@
 - 支持 `application.properties` 和 `application.yml` 配置文件
 - 使用 Vert.x 框架进行网络通信
 - Java SPI 机制
-- 实现注册中心
+- 实现注册中心(监听机制)
 - 提供接口的 Mock 服务
 - **服务中心：** 提供 Etcd 和 Zookeeper 两种实现
 - **序列化器：** 提供多种序列化器
@@ -39,3 +39,7 @@
 - **负载均衡：** 实现轮询、随机、一致性哈希等策略
 - **容错机制：** 静默处理
 - **注解驱动设计**
+
+***1. 注册中心实现监听机制：***
+![image-20240611143046053](https://git.acwing.com/junhqin/rawimage/-/raw/main/pictures/2024/06/11_14_30_46_image-20240611143046053.png)
+`服务消费者`创建监听器对服务节点key进行监听

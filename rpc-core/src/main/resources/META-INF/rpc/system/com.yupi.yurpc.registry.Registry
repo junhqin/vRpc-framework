@@ -1,2 +1,0 @@
-etcd=com.yupi.yurpc.registry.EtcdRegistry
-zookeeper=com.yupi.yurpc.registry.ZooKeeperRegistry
