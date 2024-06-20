@@ -11,7 +11,6 @@
         <module>service-common</module>
         <module>service-provider</module>
         <module>service-consumer</module>
-        <module>rpc-simple</module>
         <module>rpc-core</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
