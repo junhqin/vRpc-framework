@@ -58,3 +58,8 @@
 状态:如果是响应，记录响应的结果(类似 HTTP 的 200 状态代码)
 ```
 ![](https://git.acwing.com/junhqin/rawimage/-/raw/main/pictures/2024/06/12_9_25_32_image-20240612092525959.png)
+
+***3. 自定义注解***
+- `@EnableRpc`：
+- `@RpcService`：
+- `@RpcReference`：服务消费者注解，在需要注入的服务对象上使用

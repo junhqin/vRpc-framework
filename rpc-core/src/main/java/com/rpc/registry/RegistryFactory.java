@@ -9,7 +9,6 @@ import com.rpc.spi.SpiLoader;
  *
  */
 public class RegistryFactory {
-
     // SPI 动态加载
     static {
         SpiLoader.load(Registry.class);

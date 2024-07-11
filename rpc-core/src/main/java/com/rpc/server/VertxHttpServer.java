@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 //基于vert.x
-public class VertxRpcServer {
+public class VertxHttpServer {
     public static  final int PORT = 9998;
     public void doStart(){
         // 创建 Vert.x 实例

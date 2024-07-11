@@ -2,6 +2,7 @@ package com.rpc.proxy;
 
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.rpc.RpcApplication;
@@ -10,15 +11,31 @@ import com.rpc.constant.RpcConstant;
 import com.rpc.dto.RpcRequest;
 import com.rpc.dto.RpcResponse;
 import com.rpc.dto.ServiceMetaInfo;
+import com.rpc.fault.retry.RetryStrategy;
+import com.rpc.fault.retry.RetryStrategyFactory;
+import com.rpc.fault.tolerant.FailFastTolerantStrategy;
+import com.rpc.fault.tolerant.TolerantStrategy;
+import com.rpc.loadbalancer.ConsistentHashLoadBalancer;
+import com.rpc.loadbalancer.LoadBalancer;
+import com.rpc.protocol.ProtocolConstant;
+import com.rpc.protocol.ProtocolMessage;
+import com.rpc.protocol.ProtocolMessageDecoder;
+import com.rpc.protocol.ProtocolMessageEncoder;
+import com.rpc.protocol.ProtocolMessageSerializerEnum;
+import com.rpc.protocol.ProtocolMessageTypeEnum;
 import com.rpc.registry.Registry;
 import com.rpc.registry.RegistryFactory;
 import com.rpc.serializer.Serializer;
 import com.rpc.serializer.SerializerFactory;
+import com.rpc.server.tcp.VertxTcpClient;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 服务代理（JDK 动态代理）
@@ -27,6 +44,7 @@ import java.util.List;
  * @learn <a href="https://codefather.cn">编程宝典</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
+@Slf4j
 public class ServiceProxy implements InvocationHandler {
 
     /**
@@ -53,7 +71,6 @@ public class ServiceProxy implements InvocationHandler {
 
             //从注册中心获取服务提供者的请求地址
             RpcConfig rpcConfig = RpcApplication.getRpcConfig();
-            //TODO:使用工厂模式还是？？？
             Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistry());
             ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
             serviceMetaInfo.setServiceName(serviceName);
@@ -62,21 +79,20 @@ public class ServiceProxy implements InvocationHandler {
             if (CollUtil.isEmpty(serviceMetaInfos)) {
                 throw new RuntimeException("暂无服务地址");
             }
-//            //测试一个
-            ServiceMetaInfo serviceMetaInfo1 = serviceMetaInfos.get(0);
-
-            try (HttpResponse httpResponse = HttpRequest.post(serviceMetaInfo1.getServiceAddress())
-                    .body(bodyBytes)
-                    .execute()) {
-                byte[] result = httpResponse.bodyBytes();
-                // 反序列化
-                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
-                return rpcResponse.getData();
+            RpcResponse rpcResponse;
+            try{
+                //发送TCP请求,并应用重试机制
+                RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                rpcResponse = retryStrategy.doRetry(() ->
+                        VertxTcpClient.dpRequest(rpcRequest, serviceMetaInfos));
+            } catch (Exception e){
+                //容错机制
+                TolerantStrategy tolerantStrategy = new FailFastTolerantStrategy();
+                rpcResponse = tolerantStrategy.doTolerant(null, e);
             }
+            return rpcResponse.getData();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("调用服务失败：", e);
         }
-
-        return null;
     }
 }

@@ -143,7 +143,6 @@ public class SpiLoader {
         loadAll();
         System.out.println("loaderMap:"+loaderMap);
         Serializer serializer = getInstance(Serializer.class, "jdk");
-        System.out.println("!"+serializer);
     }
 
 }

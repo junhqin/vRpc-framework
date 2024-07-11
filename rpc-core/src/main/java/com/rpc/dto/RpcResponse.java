@@ -1,10 +1,14 @@
 package com.rpc.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RpcResponse implements Serializable {
     /**
      * 响应数据

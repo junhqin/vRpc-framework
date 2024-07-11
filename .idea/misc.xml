@@ -8,11 +8,14 @@
         <option value="$PROJECT_DIR$/rpc-core/pom.xml" />
         <option value="$PROJECT_DIR$/service-provider/pom.xml" />
         <option value="$PROJECT_DIR$/service-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-starter/springboot-provider/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/rpc-simple/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-starter/springboot-provider/pom.xml" />
       </set>
     </option>
   </component>

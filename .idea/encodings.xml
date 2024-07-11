@@ -12,6 +12,10 @@
     <file url="file://$PROJECT_DIR$/service-consumer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-starter/springboot-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-starter/springboot-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot-starter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

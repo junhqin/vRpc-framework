@@ -2,7 +2,7 @@ package com.rpc.server.example;
 
 import com.rpc.common.service.UserService;
 import com.rpc.registry.impl.LocalRegistry;
-import com.rpc.server.VertxRpcServer;
+import com.rpc.server.VertxHttpServer;
 import com.rpc.server.service.impl.UserServiceImpl;
 
 public class EasyProviderExample {
@@ -11,7 +11,7 @@ public class EasyProviderExample {
         LocalRegistry localRegistry = new LocalRegistry();
         localRegistry.register(UserService.class.getName(), UserServiceImpl.class);
         //启动web服务器
-        VertxRpcServer vertxRpcServer = new VertxRpcServer();
+        VertxHttpServer vertxRpcServer = new VertxHttpServer();
         vertxRpcServer.doStart();
     }
 }

@@ -1,5 +1,6 @@
 package com.rpc.config;
 
+import com.rpc.fault.retry.RetryStrategyKeys;
 import com.rpc.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -34,4 +35,9 @@ public class RpcConfig {
      * 注册中心配置
      */
     private RegistryConfig registryConfig ;
+
+    /**
+     * 重试机制
+     */
+    private String retryStrategy = RetryStrategyKeys.FIXED_INTERVAL;
 }

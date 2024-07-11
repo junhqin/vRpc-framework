@@ -12,6 +12,7 @@
         <module>service-provider</module>
         <module>service-consumer</module>
         <module>rpc-core</module>
+        <module>spring-boot-starter</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
 
