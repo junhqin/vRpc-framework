@@ -60,6 +60,6 @@
 ![](https://git.acwing.com/junhqin/rawimage/-/raw/main/pictures/2024/06/12_9_25_32_image-20240612092525959.png)
 
 ***3. 自定义注解***
-- `@EnableRpc`：
-- `@RpcService`：
+- `@EnableRpc`：启动类注解，标记该类为 RPC 服务启动类
+- `@RpcService`：服务提供者注解，在需要暴露的服务实现类上使用
 - `@RpcReference`：服务消费者注解，在需要注入的服务对象上使用
