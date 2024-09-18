@@ -11,3 +11,6 @@ rpc:
     port: 2181
     registry: zookeeper
   retryStrategy: fixedInterval
+server:
+  port: 8082
+

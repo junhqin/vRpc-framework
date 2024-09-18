@@ -1,6 +1,5 @@
-package com.rpc.client.starter;
+package com.rpc.client.service;
 
-import com.rpc.client.starter.ExampleServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
