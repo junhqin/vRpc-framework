@@ -12,7 +12,7 @@ public class EasyConsumerExample {
         // 动态代理
         UserService userService = ProxyFactory.getProxy(UserService.class);
         User user = new User();
-        user.setName("yupi");
+        user.setName("junhqin");
         // 调用
         User newUser = userService.getUser(user);
         if (newUser != null) {
